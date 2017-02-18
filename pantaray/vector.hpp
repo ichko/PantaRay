@@ -1,6 +1,7 @@
 #pragma once
 
 #include <math.h>
+
 #include "constants.hpp"
 
 namespace PantaRay {
@@ -37,7 +38,7 @@ namespace PantaRay {
 
         Vector& ScaleTo(double factor) {
             Normalize();
-            Scale(factor);
+            return Scale(factor);
         }
 
         Vector& Add(const Vector& vector) {

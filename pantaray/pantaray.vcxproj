@@ -152,9 +152,13 @@
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="color.hpp" />
     <ClInclude Include="constants.hpp" />
-    <ClInclude Include="matrix.h" />
+    <ClInclude Include="matrix.hpp" />
     <ClInclude Include="pantaray.hpp" />
     <ClInclude Include="ray.hpp" />
+    <ClInclude Include="object.hpp" />
+    <ClInclude Include="renderer.hpp" />
+    <ClInclude Include="scene.hpp" />
+    <ClInclude Include="shading.hpp" />
     <ClInclude Include="vector.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
