@@ -10,6 +10,8 @@ namespace PantaRay {
 
         virtual Ray GetRay(double x_interpolation, double y_interpolation) = 0;
 
+        virtual ~ICamera() {}
+
     };
 
 
