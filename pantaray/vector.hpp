@@ -35,6 +35,11 @@ namespace PantaRay {
             return *this;
         }
 
+        Vector& ScaleTo(double factor) {
+            Normalize();
+            Scale(factor);
+        }
+
         Vector& Add(const Vector& vector) {
             x += vector.x;
             y += vector.y;

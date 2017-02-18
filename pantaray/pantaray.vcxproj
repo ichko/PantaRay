@@ -149,9 +149,12 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.hpp" />
     <ClInclude Include="color.hpp" />
     <ClInclude Include="constants.hpp" />
+    <ClInclude Include="matrix.h" />
     <ClInclude Include="pantaray.hpp" />
+    <ClInclude Include="ray.hpp" />
     <ClInclude Include="vector.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

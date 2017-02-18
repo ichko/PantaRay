@@ -8,7 +8,7 @@ namespace PantaRay {
 
         virtual void Begin() = 0;
 
-        virtual Ray GetRay(double x, double y) = 0;
+        virtual Ray GetRay(double x_interpolation, double y_interpolation) = 0;
 
     };
 
@@ -48,6 +48,22 @@ namespace PantaRay {
             top_left = middle_left.Copy().Add(middle_up);
             top_right = left.Copy().Scale(-left_factor).Add(middle_up);
             bottom_left = middle_left.Copy().Add(up.Copy().Scale(-up_factor));
+        }
+
+        Ray GetRay(double x_interpolation, double y_interpolation) {
+            auto _top_right = top_right.Copy();
+            return Ray(
+                position.Copy(),
+                _top_right
+                    .Copy()
+                    .Subtract(top_left)
+                    .ScaleTo(x_interpolation)
+                    .Add(_top_right
+                        .Copy()
+                        .Subtract(bottom_left)
+                        .ScaleTo(y_interpolation)
+                    )
+            );
         }
 
     };
