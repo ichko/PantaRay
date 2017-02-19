@@ -14,14 +14,14 @@ namespace PantaRay {
 
     };
 
-    struct Checker : public IShader {
+    struct CheckerShader : public IShader {
 
         double size;
 
         Color first;
         Color second;
 
-        Checker(Color&& _first, Color&& _second, double _size = 5) :
+        CheckerShader(Color&& _first, Color&& _second, double _size = 20000) :
             size(_size), first(_first), second(_second) {
         }
 

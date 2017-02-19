@@ -32,6 +32,9 @@ namespace PantaRay {
                     intersection.distance = scalar;
                     intersection.normal = normal;
                     intersection.position = ray.ScaleTo(scalar);
+                    intersection.u = intersection.position.x;
+                    intersection.v = intersection.position.y;
+
                     return true;
                 }
             }

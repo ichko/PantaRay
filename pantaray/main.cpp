@@ -13,7 +13,7 @@ int main() {
         .Setup(Vector(0, 0, 10), Vector(0, 1, 10));
 
     auto plane_geometry = PlaneGeometry(Vector(), Vector(0, 0, 1));
-    auto checker_shader = Checker(Color(1, 1, 0), Color(0, 1, 0));
+    auto checker_shader = CheckerShader(Color(1, 1, 0), Color(0, 1, 0));
 
     auto scene = Scene().Add(Mesh(&plane_geometry, &checker_shader));
 
@@ -21,12 +21,12 @@ int main() {
 
     for (auto y = 0; y < height; y++) {
         for (auto x = 0; x < width; x++) {
-            char symbol = '.';
+            char symbol = '_';
             if (buffer[y][x].g > 0) {
                 symbol = '#';
             }
             if (buffer[y][x].r > 0) {
-                symbol = '%';
+                symbol = '-';
             }
 
             std::cout << symbol;
