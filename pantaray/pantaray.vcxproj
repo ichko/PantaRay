@@ -152,10 +152,12 @@
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="color.hpp" />
     <ClInclude Include="constants.hpp" />
+    <ClInclude Include="intersection.hpp" />
     <ClInclude Include="matrix.hpp" />
+    <ClInclude Include="mesh.hpp" />
     <ClInclude Include="pantaray.hpp" />
     <ClInclude Include="ray.hpp" />
-    <ClInclude Include="object.hpp" />
+    <ClInclude Include="geometry.hpp" />
     <ClInclude Include="renderer.hpp" />
     <ClInclude Include="scene.hpp" />
     <ClInclude Include="shading.hpp" />

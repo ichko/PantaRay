@@ -31,15 +31,17 @@ namespace PantaRay {
     public:
         PinholåCamera(double _fov, double _aspect_ratio) : fov(_fov), aspect_ratio(_aspect_ratio) {}
 
-        void Setup(Vector _position, Vector _target, Vector _up = Vector(0, 0, 1)) {
+        PinholåCamera& Setup(Vector _position, Vector _target, Vector _up = Vector(0, 0, 1)) {
             position = _position;
-            target = _target.Normalize();
+            target = _target;
             up = _up.Normalize();
+
+            return *this;
         }
 
         void Begin() {
             auto forward = target.Copy().Subtract(position);
-            auto left = forward.Copy().Cross(up).Normalize();
+            auto left = up.Copy().Cross(forward).Normalize();
 
             auto left_factor = forward.Length() * tan(fov / 2);
             auto up_factor = left_factor / aspect_ratio;
@@ -47,24 +49,17 @@ namespace PantaRay {
             auto middle_left = left.Copy().Scale(left_factor);
             auto middle_up = up.Copy().Scale(up_factor);
 
-            top_left = middle_left.Copy().Add(middle_up);
-            top_right = left.Copy().Scale(-left_factor).Add(middle_up);
-            bottom_left = middle_left.Copy().Add(up.Copy().Scale(-up_factor));
+            top_left = middle_left.Copy().Add(middle_up).Add(forward);
+            top_right = left.Copy().Scale(-left_factor).Add(middle_up).Add(forward);
+            bottom_left = middle_left.Copy().Add(up.Copy().Scale(-up_factor)).Add(forward);
         }
 
         Ray GetRay(double x_interpolation, double y_interpolation) {
-            auto _top_right = top_right.Copy();
             return Ray(
                 position.Copy(),
-                _top_right
-                    .Copy()
-                    .Subtract(top_left)
-                    .ScaleTo(x_interpolation)
-                    .Add(_top_right
-                        .Copy()
-                        .Subtract(bottom_left)
-                        .ScaleTo(y_interpolation)
-                    )
+                top_left.Copy()
+                    .Add(top_right.Copy().Subtract(top_left).Scale(x_interpolation)
+                    .Add(bottom_left.Copy().Subtract(top_left).Scale(y_interpolation)))
             );
         }
 

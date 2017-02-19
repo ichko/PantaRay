@@ -63,10 +63,10 @@ namespace PantaRay {
             return *this;
         }
 
-        Vector Cross(const Vector& vector) {
+        Vector& Cross(const Vector& vector) {
             auto _x = y * vector.z - z * vector.y;
             auto _y = z * vector.x - x * vector.z;
-            auto _z = z * vector.y - y * vector.x;
+            auto _z = x * vector.y - y * vector.x;
 
             x = _x;
             y = _y;

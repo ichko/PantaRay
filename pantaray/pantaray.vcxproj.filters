@@ -44,13 +44,19 @@
     <ClInclude Include="scene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="object.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="matrix.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="shading.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="intersection.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,19 +12,27 @@ namespace PantaRay {
         unsigned height;
 
         Color** screen_buffer;
+        Color background;
 
     public:
-        Renderer(unsigned _width, unsigned _height) :
+        Renderer(unsigned _width, unsigned _height, Color&& _background = Color()) :
             width(_width),
             height(_height),
-            screen_buffer((Color**) new Color[width * height]) {
+            background(_background) {
+            screen_buffer = new Color*[height];
+            for (unsigned y = 0; y < height; y++) {
+                screen_buffer[y] = new Color[width];
+            }
         }
 
         ~Renderer() {
+            for (unsigned y = 0; y < height; y++) {
+                delete[] screen_buffer[y];
+            }
             delete[] screen_buffer;
         }
 
-        Color** Render(ICamera& camera, IScene scene) {
+        Color** Render(ICamera& camera, Scene& scene) {
             camera.Begin();
 
             for (unsigned y = 0; y < height; ++y) {
@@ -32,6 +40,7 @@ namespace PantaRay {
                     double x_interpolate = double(x) / double(width);
                     double y_interpolate = double(y) / double(height);
                     Ray ray = camera.GetRay(x_interpolate, y_interpolate);
+                    screen_buffer[y][x] = Trace(ray, scene);
                 }
             }
 
@@ -39,10 +48,26 @@ namespace PantaRay {
         }
 
     private:
-        Color Trace(Ray& ray, const IScene& scene) {
+        Color Trace(Ray& ray, Scene& scene) {
+            auto closest_intersection = Intersection();
+            closest_intersection.distance = Constants::inf;
+            Mesh* closest_mesh = nullptr;
 
+            for (auto& object : scene.GetObjects()) {
+                auto intersection = Intersection();
+                if (object.geometry->Intersect(ray, intersection) &&
+                    intersection.distance < closest_intersection.distance) {
+                    closest_intersection = intersection;
+                    closest_mesh = &object;
+                }
+            }
+
+            if (closest_mesh != nullptr) {
+                return closest_mesh->shader->Shade(ray, closest_intersection);
+            }
+
+            return background;
         }
-
 
     };
 
