@@ -11,7 +11,9 @@ namespace PantaRay {
         IGeometry* geometry;
         IShader* shader;
 
-        Mesh(IGeometry* _geometry, IShader* _shader) : geometry(_geometry), shader(_shader) {}
+        Mesh(IGeometry& _geometry, IShader& _shader) : geometry(&_geometry), shader(&_shader) {}
+
+        Mesh(IGeometry&& _geometry, IShader&& _shader) : geometry(&_geometry), shader(&_shader) {}
 
     };
 

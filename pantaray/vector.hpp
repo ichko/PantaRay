@@ -20,11 +20,11 @@ namespace PantaRay {
             return Length() < eps;
         }
 
-        double LengthSqr() {
+        double LengthSqr() const {
             return x * x + y * y + z * z;
         }
 
-        double Length() {
+        double Length() const {
             return sqrt(LengthSqr());
         }
 

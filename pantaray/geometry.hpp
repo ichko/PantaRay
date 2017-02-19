@@ -1,5 +1,7 @@
 #pragma once
 
+#include <math.h>
+
 #include "vector.hpp"
 #include "ray.hpp"
 #include "shading.hpp"
@@ -32,8 +34,47 @@ namespace PantaRay {
                     intersection.distance = scalar;
                     intersection.normal = normal;
                     intersection.position = ray.ScaleTo(scalar);
+
+                    // TODO: Fix uv coords
                     intersection.u = intersection.position.x;
                     intersection.v = intersection.position.y;
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+    };
+
+    struct SphereGeometry : public IGeometry {
+
+        Vector position;
+        double radius;
+
+        SphereGeometry(Vector&& _position, double&& _radius) : position(_position), radius(_radius) {}
+
+        bool Intersect(const Ray& ray, Intersection& intersection) {
+            double a = ray.direction.LengthSqr();
+            double b = ray.direction.Copy().Dot(ray.start.Copy().Subtract(position)) * 2;
+            double c = ray.start.Copy().Subtract(position).LengthSqr() - radius * radius;
+            double d = b * b - 4 * a * c;
+
+            if (d > 0) {
+                double x1 = (-b + sqrt(d)) / 2 * a;
+                double x2 = (-b - sqrt(d)) / 2 * a;
+                double min_x = x1 > x2 ? x2 : x1;
+
+                if (min_x > 0) {
+                    intersection.distance = min_x;
+                    intersection.position = ray.start.Copy().Scale(min_x);
+                    intersection.normal = intersection.position.Copy().Subtract(position).Normalize();
+
+                    auto reverse_normal = intersection.normal.Copy();
+
+                    intersection.u = (atan2(reverse_normal.z, reverse_normal.x) + Constants::pi) / (2 * Constants::pi);
+                    intersection.v = (asin(reverse_normal.y / radius) + Constants::pi / 2) / Constants::pi;
 
                     return true;
                 }
