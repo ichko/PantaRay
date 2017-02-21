@@ -3,3 +3,8 @@ Debug/
 *.opendb
 *.db
 *.TMP
+SDL_*
+README-*
+*.lib
+*/docs/*
+\sdl*

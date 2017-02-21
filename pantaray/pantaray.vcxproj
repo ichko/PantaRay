@@ -71,6 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\i4ko9\ssd\c++\pantaray\pantaray\sdl\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\i4ko9\ssd\c++\pantaray\pantaray\sdl\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -91,8 +93,9 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -160,6 +163,7 @@
     <ClInclude Include="geometry.hpp" />
     <ClInclude Include="renderer.hpp" />
     <ClInclude Include="scene.hpp" />
+    <ClInclude Include="sdl.hpp" />
     <ClInclude Include="shading.hpp" />
     <ClInclude Include="vector.hpp" />
   </ItemGroup>

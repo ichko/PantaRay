@@ -21,7 +21,7 @@ namespace PantaRay {
         Color first;
         Color second;
 
-        CheckerShader(Color&& _first, Color&& _second, double _size = 20000) :
+        CheckerShader(Color&& _first, Color&& _second, double _size = 2000000) :
             size(_size), first(_first), second(_second) {
         }
 
