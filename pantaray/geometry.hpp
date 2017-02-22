@@ -62,13 +62,13 @@ namespace PantaRay {
             double d = b * b - 4 * a * c;
 
             if (d > 0) {
-                double x1 = (-b + sqrt(d)) / 2 * a;
-                double x2 = (-b - sqrt(d)) / 2 * a;
+                double x1 = (-b + sqrt(d)) / (2 * a);
+                double x2 = (-b - sqrt(d)) / (2 * a);
                 double min_x = x1 > x2 ? x2 : x1;
 
                 if (min_x > 0) {
                     intersection.distance = min_x;
-                    intersection.position = ray.start.Copy().Scale(min_x);
+                    intersection.position = ray.start.Copy().Add(ray.direction.Copy().Scale(min_x));
                     intersection.normal = intersection.position.Copy().Subtract(position).Normalize();
 
                     auto reverse_normal = intersection.normal.Copy();
