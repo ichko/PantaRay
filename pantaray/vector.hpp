@@ -50,7 +50,9 @@ namespace PantaRay {
         }
 
         Vector& Subtract(const Vector& vector) {
-            Add(vector.Copy().Reflect());
+            x -= vector.x;
+            y -= vector.y;
+            z -= vector.z;
 
             return *this;
         }
