@@ -71,10 +71,10 @@ namespace PantaRay {
                     intersection.position = ray.start.Copy().Add(ray.direction.Copy().Scale(min_x));
                     intersection.normal = intersection.position.Copy().Subtract(position).Normalize();
 
-                    auto reverse_normal = intersection.normal.Copy();
+                    auto normal_copy = intersection.normal.Copy();
 
-                    intersection.u = (atan2(reverse_normal.z, reverse_normal.x) + Constants::pi) / (2 * Constants::pi);
-                    intersection.v = (asin(reverse_normal.y / radius) + Constants::pi / 2) / Constants::pi;
+                    intersection.u = (atan2(normal_copy.z, normal_copy.x) + Constants::pi) / (2 * Constants::pi);
+                    intersection.v = (asin(normal_copy.y / radius) + Constants::pi / 2) / Constants::pi;
 
                     return true;
                 }
