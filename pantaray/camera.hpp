@@ -15,7 +15,7 @@ namespace PantaRay {
     };
 
 
-    class PinholåCamera : public ICamera {
+    class PinholeCamera : public ICamera {
 
         Vector top_left;
         Vector top_right;
@@ -29,21 +29,22 @@ namespace PantaRay {
         double aspect_ratio;
 
     public:
-        PinholåCamera(double _fov, double _aspect_ratio) : fov(_fov), aspect_ratio(_aspect_ratio) {}
+        PinholeCamera(double _fov, double _aspect_ratio) : fov(_fov), aspect_ratio(_aspect_ratio) {}
 
-        PinholåCamera& Setup(Vector _position, Vector _target, Vector _up = Vector(0, 0, 1)) {
+        PinholeCamera& Setup(Vector _position, Vector _target, Vector _up = Vector(0, 0, 1)) {
             position = _position;
             target = _target;
             up = _up.Normalize();
 
             return *this;
+
         }
 
         void Begin() {
-            auto forward = target.Copy().Subtract(position);
+            auto forward = target.Copy().Subtract(position).Normalize();
             auto left = up.Copy().Cross(forward).Normalize();
 
-            auto left_factor = forward.Length() * tan(fov / 2);
+            auto left_factor = tan(fov / 2);
             auto up_factor = left_factor / aspect_ratio;
 
             auto middle_left = left.Copy().Scale(left_factor);
