@@ -34,4 +34,17 @@ namespace PantaRay {
 
     };
 
+    struct NormalShader : public IShader {
+
+        Color Shade(Ray& ray, Intersection& intersection) {
+            auto normal = intersection.normal.Copy();
+            normal.x = fabs(normal.x);
+            normal.y = fabs(normal.y);
+            normal.z = fabs(normal.z);
+
+            return Color(normal.x, normal.y, normal.z);
+        }
+
+    };
+
 }
