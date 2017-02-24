@@ -29,7 +29,7 @@ namespace PantaRay {
             double denom = normal.Dot(ray.direction);
 
             if (fabs(denom) > Constants::eps) {
-                double scalar = position.Subtract(ray.start).Dot(normal) / denom;
+                double scalar = position.Copy().Subtract(ray.start).Dot(normal) / denom;
                 if (scalar >= 0) {
                     intersection.distance = scalar;
                     intersection.normal = normal;
@@ -68,7 +68,7 @@ namespace PantaRay {
 
                 if (min_x > 0) {
                     intersection.distance = min_x;
-                    intersection.position = ray.start.Copy().Add(ray.direction.Copy().Scale(min_x));
+                    intersection.position = ray.ScaleTo(min_x);
                     intersection.normal = intersection.position.Copy().Subtract(position).Normalize();
 
                     auto normal_copy = intersection.normal.Copy();

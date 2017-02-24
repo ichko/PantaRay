@@ -31,7 +31,7 @@ namespace PantaRay {
     public:
         PinholeCamera(double _fov, double _aspect_ratio) : fov(_fov), aspect_ratio(_aspect_ratio) {}
 
-        PinholeCamera& Setup(Vector _position, Vector _target, Vector _up = Vector(0, 0, 1)) {
+        PinholeCamera& Set(Vector _position, Vector _target, Vector _up = Vector(0, 0, 1)) {
             position = _position;
             target = _target;
             up = _up.Normalize();
@@ -59,8 +59,9 @@ namespace PantaRay {
             return Ray(
                 position.Copy(),
                 top_left.Copy()
-                    .Add(top_right.Copy().Subtract(top_left).Scale(x_interpolation)
-                    .Add(bottom_left.Copy().Subtract(top_left).Scale(y_interpolation)))
+                    .Add(top_right.Copy().Subtract(top_left).Scale(x_interpolation))
+                    .Add(bottom_left.Copy().Subtract(top_left).Scale(y_interpolation))
+                    .Normalize()
             );
         }
 

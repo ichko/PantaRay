@@ -21,13 +21,13 @@ namespace PantaRay {
         Color first;
         Color second;
 
-        CheckerShader(Color&& _first, Color&& _second, double _size = 2000000) :
+        CheckerShader(Color&& _first, Color&& _second, double _size = 5) :
             size(_size), first(_first), second(_second) {
         }
 
         Color Shade(Ray& ray, Intersection& intersection) {
-            int x = (int) double(intersection.u / size);
-            int y = (int) double(intersection.v / size);
+            int x = int(intersection.u / size);
+            int y = int(intersection.v / size);
 
             return (x + y) % 2 == 0 ? first : second;
         }
