@@ -1,7 +1,7 @@
 #include <SDL.h>
 
 #include "pantaray.hpp"
-#include "sdl.hpp"
+#include "sdl-init.hpp"
 
 using namespace PantaRay;
 using namespace PantaRay::Constants;

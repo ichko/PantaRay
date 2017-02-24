@@ -163,7 +163,7 @@
     <ClInclude Include="geometry.hpp" />
     <ClInclude Include="renderer.hpp" />
     <ClInclude Include="scene.hpp" />
-    <ClInclude Include="sdl.hpp" />
+    <ClInclude Include="sdl-init.hpp" />
     <ClInclude Include="shading.hpp" />
     <ClInclude Include="vector.hpp" />
   </ItemGroup>

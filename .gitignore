@@ -7,4 +7,4 @@ SDL_*
 README-*
 *.lib
 */docs/*
-\sdl*
+sdl/

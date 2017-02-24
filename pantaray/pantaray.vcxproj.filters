@@ -59,7 +59,7 @@
     <ClInclude Include="mesh.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdl.hpp">
+    <ClInclude Include="sdl-init.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
