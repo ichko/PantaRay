@@ -6,5 +6,5 @@ C++ Raytracer
 ###Console Example
 ![console example](assets/console_example.png)
 
-###Console Example
-![console example](assets/sdl_example.png)
+###SDL Example
+![sdl example](assets/sdl_example.png)
