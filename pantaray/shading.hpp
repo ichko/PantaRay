@@ -1,14 +1,17 @@
 #pragma once
 
+#include <vector>
+
+#include "intersection.hpp"
+#include "light.hpp"
 #include "color.hpp"
 #include "ray.hpp"
-#include "intersection.hpp"
 
 namespace PantaRay {
 
     struct IShader {
 
-        virtual Color Shade(Ray& ray, Intersection& intersection) = 0;
+        virtual Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) = 0;
 
         virtual ~IShader() {}
 
@@ -25,7 +28,7 @@ namespace PantaRay {
             size(_size), first(_first), second(_second) {
         }
 
-        Color Shade(Ray& ray, Intersection& intersection) {
+        Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) {
             int x = int(intersection.u / size);
             int y = int(intersection.v / size);
 
@@ -36,13 +39,9 @@ namespace PantaRay {
 
     struct NormalShader : public IShader {
 
-        Color Shade(Ray& ray, Intersection& intersection) {
-            auto normal = intersection.normal.Copy();
-            normal.x = fabs(normal.x);
-            normal.y = fabs(normal.y);
-            normal.z = fabs(normal.z);
-
-            return Color(normal.x, normal.y, normal.z);
+        Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) {
+            auto normal = intersection.normal;
+            return Color(fabs(normal.x), fabs(normal.y), fabs(normal.z));
         }
 
     };

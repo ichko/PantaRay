@@ -47,7 +47,7 @@ namespace PantaRay {
                         Color color_sum = Color();
                         for (double i = 0; i < 2; i++) {
                             for (double j = 0; j < 2; j++) {
-                                Ray ray = camera.GetRay(x_interpolate + i / (width * 2.0), y_interpolate + j / (height * 2.0));
+                                Ray ray = camera.GetRay(x_interpolate + (i + 0.5) / (width), y_interpolate + (j + 0.5) / (height));
                                 color_sum.Add(Trace(ray, scene));
                             }
                         }
@@ -80,7 +80,7 @@ namespace PantaRay {
             }
 
             if (closest_mesh != nullptr) {
-                return closest_mesh->shader->Shade(ray, closest_intersection);
+                return closest_mesh->shader->Shade(ray, closest_intersection, scene.GetLights());
             }
 
             return background;

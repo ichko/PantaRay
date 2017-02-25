@@ -8,16 +8,17 @@ using namespace PantaRay::Constants;
 
 int main(int argc, char** argv) {
 
-    auto width = 800;
-    auto height = 600;
+    auto width = 500;
+    auto height = 500;
 
     auto renderer = Renderer(width, height);
+    renderer.anti_aliasing = true;
 
-    auto camera = PinholeCamera(pi / 2, width / height)
-        .Set(Vector(10, 0, 20), Vector(10, -1, 20), Vector(0, 0, 1));
+    auto camera = PinholeCamera(pi / 2.5, width / height)
+        .Set(Vector(10, 0, 20), Vector(10, 1, 20), Vector(0, 0, 1));
 
     auto plane_geometry = PlaneGeometry(Vector(0, 0, 0), Vector(0, 0, 1));
-    auto sphere_geometry = SphereGeometry(Vector(30, -50, 30), 20);
+    auto sphere_geometry = SphereGeometry(Vector(30, 80, 30), 20);
 
     auto checker_shader = CheckerShader(Color(1, 1, 0), Color(0, 1, 0));
     auto sphere_checker_shader = CheckerShader(Color(1, 0, 0), Color(0, 0, 1), 0.0001);

@@ -30,6 +30,10 @@ namespace PantaRay {
             return Color(r, g, b);
         }
 
+        static Color White() {
+            return Color(1, 1, 1);
+        }
+
     };
 
 }

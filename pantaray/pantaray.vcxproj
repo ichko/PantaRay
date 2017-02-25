@@ -159,6 +159,7 @@
     <ClInclude Include="color.hpp" />
     <ClInclude Include="constants.hpp" />
     <ClInclude Include="intersection.hpp" />
+    <ClInclude Include="light.hpp" />
     <ClInclude Include="matrix.hpp" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="pantaray.hpp" />
