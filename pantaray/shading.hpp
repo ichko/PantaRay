@@ -30,8 +30,8 @@ namespace PantaRay {
         }
 
         Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) {
-            int x = int(intersection.u / size);
-            int y = int(intersection.v / size);
+            int x = (int) floor(intersection.u / size);
+            int y = (int) floor(intersection.v / size);
 
             return (x + y) % 2 == 0 ? first : second;
         }
@@ -60,14 +60,41 @@ namespace PantaRay {
             Color color_sum;
 
             for (auto& light : lights) {
-                if (light->IsType(LightType::PointLigh)) {
+                if (light->IsType(LightType::Point)) {
                     auto point_light = Cast<PointLight*>(light);
-                    auto light_factor = point_light->CastOn(intersection.position).Dot(intersection.normal);
-                    color_sum.Add(point_light->color.Copy().Scale(float(light_factor)));
+                    auto vector_to_light = point_light->VectorToLight(intersection.position);
+                    auto light_factor = vector_to_light.Copy().Normalize().Dot(intersection.normal);
+                    auto attenuation = 1.0 / vector_to_light.LengthSqr();
+                    color_sum
+                        .Legalize()
+                        .Add(point_light->color.Copy().Scale(light_factor * attenuation * point_light->intensity))
+                        .Times(color);
+                }
+                else if (light->IsType(LightType::Ambient)) {
+                    auto ambient_light = Cast<AmbientLight*>(light);
+                    color_sum.Legalize().Add(color.Copy().Times(ambient_light->color));
                 }
             }
 
-            return color_sum.Times(color);
+            return color_sum;
+        }
+
+    };
+
+    struct CopositionShader : public IShader {
+
+        IShader* first;
+        IShader* second;
+        double ratio;
+
+        CopositionShader(IShader& _first, IShader& _second, double _ratio = 0.5) :
+            first(&_first), second(&_second), ratio(_ratio) {}
+
+        Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) {
+            auto first_color = first->Shade(ray, intersection, lights).Scale(ratio);
+            auto second_color = second->Shade(ray, intersection, lights).Scale(1 - ratio);
+
+            return first_color.Add(second_color);
         }
 
     };
