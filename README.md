@@ -7,4 +7,4 @@ C++ Raytracer
 ![console example](assets/console_example.png)
 
 ###SDL Example
-![sdl example](assets/sdl_example.png)
+![sdl example](assets/sdl_example_anti_aliasing.png)
