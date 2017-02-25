@@ -7,7 +7,8 @@
 namespace PantaRay {
 
     enum LightType {
-        PointLigh
+        Point,
+        Ambient
     };
 
     struct ILight {
@@ -16,7 +17,7 @@ namespace PantaRay {
         Color color;
         LightType type;
 
-        virtual Vector CastOn(const Vector& intersection_position) = 0;
+        virtual Vector VectorToLight(const Vector& intersection_position) = 0;
 
         virtual ~ILight() {}
 
@@ -33,11 +34,26 @@ namespace PantaRay {
         PointLight(const Vector&& _position, float _intensity = 1, Color& _color = Color::White()) : position(_position) {
             intensity = _intensity;
             color = _color;
-            type = LightType::PointLigh;
+            type = LightType::Point;
         }
 
-        Vector CastOn(const Vector& intersection_position) {
-            return position.Copy().Subtract(intersection_position).Normalize();
+        Vector VectorToLight(const Vector& intersection_position) {
+            return position.Copy().Subtract(intersection_position);
+        };
+
+    };
+
+    struct AmbientLight : public ILight {
+
+        Vector position;
+
+        AmbientLight(Color _color) {
+            color = _color;
+            type = LightType::Ambient;
+        }
+
+        Vector VectorToLight(const Vector& intersection_position) {
+            return Vector();
         };
 
     };

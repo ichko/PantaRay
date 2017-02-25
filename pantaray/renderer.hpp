@@ -45,15 +45,14 @@ namespace PantaRay {
 
                     if (anti_aliasing) {
                         Color color_sum = Color();
-                        for (double i = 0; i < 2; i++) {
-                            for (double j = 0; j < 2; j++) {
-                                // TODO Fix anti aliasing
-                                Ray ray = camera.GetRay(x_interpolate, y_interpolate);
+                        for (double i = 0; i < 3; i++) {
+                            for (double j = 0; j < 3; j++) {
+                                Ray ray = camera.GetRay(x_interpolate + ((i / 3) / width), y_interpolate + ((j / 3) / height));
                                 color_sum.Add(Trace(ray, scene));
                             }
                         }
 
-                        screen_buffer[y][x] = color_sum.Copy().Scale(1 / 2);
+                        screen_buffer[y][x] = color_sum.Scale(1.0 / 9.0);
                     }
                     else {
                         Ray ray = camera.GetRay(x_interpolate, y_interpolate);
