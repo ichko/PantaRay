@@ -12,7 +12,6 @@ int main(int argc, char** argv) {
     auto height = 500;
 
     auto renderer = Renderer(width, height);
-    renderer.anti_aliasing = true;
 
     auto camera = PinholeCamera(pi / 2.5, width / height)
         .Set(Vector(10, 0, 20), Vector(10, 1, 20), Vector(0, 0, 1));
@@ -21,16 +20,20 @@ int main(int argc, char** argv) {
     auto sphere_geometry = SphereGeometry(Vector(30, 80, 30), 20);
 
     auto checker_shader = CheckerShader(Color(1, 1, 0), Color(0, 1, 0));
-    auto sphere_checker_shader = CheckerShader(Color(1, 0, 0), Color(0, 0, 1), 0.0001);
+    auto sphere_checker_shader = CheckerShader(Color(1, 0, 0), Color(0, 0, 1), 0.01f);
     auto normal_shader = NormalShader();
+    auto lambert_shader = LambertShader(Color(1, 0, 0));
+    auto point_light = PointLight(Vector(-10, 50, 20), 422);
 
     auto scene = Scene()
-        .Add(Mesh(plane_geometry, checker_shader))
-        .Add(Mesh(sphere_geometry, normal_shader));
+        .Add(Mesh(plane_geometry, lambert_shader))
+        .Add(Mesh(sphere_geometry, normal_shader))
+
+        .Add(point_light);
 
     auto buffer = renderer.Render(camera, scene);
 
-    magic(width, height, buffer);
+    init(width, height, buffer);
 
     return 0;
 

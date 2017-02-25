@@ -77,7 +77,12 @@ namespace PantaRay {
             return *this;
         }
 
-        double Dot(const Vector& vector) {
+        Vector& Reflect(const Vector& normal) {
+            Subtract(normal.Copy().Scale(normal.Dot(*this) * 2));
+            return *this;
+        }
+
+        double Dot(const Vector& vector) const {
             return x * vector.x + y * vector.y + z * vector.z;
         }
 

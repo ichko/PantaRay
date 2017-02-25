@@ -39,7 +39,7 @@ namespace PantaRay {
             camera.Begin();
 
             for (unsigned y = 0; y < height; ++y) {
-                for (unsigned x = 0; x < width; x++) {
+                for (unsigned x = 0; x < width; ++x) {
                     double x_interpolate = double(x) / double(width);
                     double y_interpolate = double(y) / double(height);
 
@@ -47,12 +47,13 @@ namespace PantaRay {
                         Color color_sum = Color();
                         for (double i = 0; i < 2; i++) {
                             for (double j = 0; j < 2; j++) {
-                                Ray ray = camera.GetRay(x_interpolate + (i + 0.5) / (width), y_interpolate + (j + 0.5) / (height));
+                                // TODO Fix anti aliasing
+                                Ray ray = camera.GetRay(x_interpolate, y_interpolate);
                                 color_sum.Add(Trace(ray, scene));
                             }
                         }
 
-                        screen_buffer[y][x] = color_sum.Scale(1 / 4);
+                        screen_buffer[y][x] = color_sum.Copy().Scale(1 / 2);
                     }
                     else {
                         Ray ray = camera.GetRay(x_interpolate, y_interpolate);

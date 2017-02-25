@@ -18,6 +18,14 @@ namespace PantaRay {
             return *this;
         }
 
+        Color& Times(const Color& color) {
+            r *= color.r;
+            g *= color.g;
+            b *= color.b;
+
+            return *this;
+        }
+
         Color& Add(const Color& color) {
             r += color.r;
             g += color.g;
@@ -28,6 +36,14 @@ namespace PantaRay {
 
         Color Copy() {
             return Color(r, g, b);
+        }
+
+        Color& Legalize() {
+            r = fminf(fmax(0.f, r), 1.f);
+            g = fminf(fmax(0.f, g), 1.f);
+            b = fminf(fmax(0.f, b), 1.f);
+
+            return *this;
         }
 
         static Color White() {
