@@ -39,9 +39,9 @@ namespace PantaRay {
         }
 
         Color& Legalize() {
-            r = fmin(fmax(0.0f, r), 1.0f);
-            g = fmin(fmax(0.0f, g), 1.0f);
-            b = fmin(fmax(0.0f, b), 1.0f);
+            r = float(fmin(fmax(0.0f, r), 1.0f));
+            g = float(fmin(fmax(0.0f, g), 1.0f));
+            b = float(fmin(fmax(0.0f, b), 1.0f));
 
             return *this;
         }

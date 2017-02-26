@@ -64,7 +64,7 @@ namespace PantaRay {
                     auto point_light = Cast<PointLight*>(light);
                     auto vector_to_light = point_light->VectorToLight(intersection.position);
                     auto light_factor = vector_to_light.Copy().Normalize().Dot(intersection.normal);
-                    auto attenuation = 1.0 / vector_to_light.LengthSqr();
+                    auto attenuation = 1.0f / vector_to_light.LengthSqr();
                     color_sum
                         .Legalize()
                         .Add(point_light->color.Copy().Scale(light_factor * attenuation * point_light->intensity))

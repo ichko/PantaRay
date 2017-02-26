@@ -11,8 +11,8 @@ int init(unsigned width, unsigned height, PantaRay::Color** buffer) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
 
-    for (int y = 0; y < height; ++y) {
-        for (int x = 0; x < width; ++x) {
+    for (size_t y = 0; y < height; ++y) {
+        for (size_t x = 0; x < width; ++x) {
             auto c = buffer[y][x].Legalize().Scale(255);
             SDL_SetRenderDrawColor(renderer, (Uint8)c.r, (Uint8)c.g, (Uint8)c.b, 255);
             SDL_RenderDrawPoint(renderer, x, y);

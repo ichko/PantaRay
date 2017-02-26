@@ -66,9 +66,10 @@ int main(int argc, char** argv) {
     clock_t tStart = clock();
 
     auto buffer = renderer.Render(camera, scene);
-    init(width, height, buffer);
 
-    printf("Time taken: %.2fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
+    printf("Time taken: %.6fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
+
+    init(width, height, buffer);
 
     return 0;
 
