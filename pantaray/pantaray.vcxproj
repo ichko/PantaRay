@@ -176,6 +176,7 @@
     <ClInclude Include="scene.hpp" />
     <ClInclude Include="sdl-init.hpp" />
     <ClInclude Include="shading.hpp" />
+    <ClInclude Include="texture.hpp" />
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="vector.hpp" />
   </ItemGroup>

@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     unsigned height = 500;
 
     auto renderer = Renderer(width, height, Color(0.01f, 0.01f, 0.01f));
-    renderer.anti_aliasing = true;
+    // renderer.anti_aliasing = true;
 
     auto camera = PinholeCamera(pi / 2.5f, float(width) / float(height))
         .Set(Vector(10, 0, 20), Vector(10, 1, 20), Vector(0, 0, 1));

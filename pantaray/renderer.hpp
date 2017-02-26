@@ -3,6 +3,7 @@
 #include "color.hpp"
 #include "camera.hpp"
 #include "scene.hpp"
+#include "texture.hpp"
 
 namespace PantaRay {
 
@@ -11,7 +12,7 @@ namespace PantaRay {
         unsigned width;
         unsigned height;
 
-        Color** screen_buffer;
+        Image screen_buffer;
         Color background;
 
     public:
@@ -21,21 +22,11 @@ namespace PantaRay {
             width(_width),
             height(_height),
             background(_background),
+            screen_buffer(width, height),
             anti_aliasing(false) {
-            screen_buffer = new Color*[height];
-            for (unsigned y = 0; y < height; y++) {
-                screen_buffer[y] = new Color[width];
-            }
         }
 
-        ~Renderer() {
-            for (unsigned y = 0; y < height; y++) {
-                delete[] screen_buffer[y];
-            }
-            delete[] screen_buffer;
-        }
-
-        Color** Render(ICamera& camera, Scene& scene) {
+        Image* Render(ICamera& camera, Scene& scene) {
             camera.Begin();
 
             for (unsigned y = 0; y < height; ++y) {
@@ -56,16 +47,16 @@ namespace PantaRay {
                             }
                         }
 
-                        screen_buffer[y][x] = color_sum.Scale(1.0f / (kernel_size * kernel_size));
+                        screen_buffer.Set(x, y, color_sum.Scale(1.0f / (kernel_size * kernel_size)));
                     }
                     else {
                         Ray ray = camera.GetRay(x_interpolate, y_interpolate);
-                        screen_buffer[y][x] = Trace(ray, scene);
+                        screen_buffer.Set(x, y, Trace(ray, scene));
                     }
                 }
             }
 
-            return screen_buffer;
+            return &screen_buffer;
         }
 
     private:
