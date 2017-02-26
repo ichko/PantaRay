@@ -38,7 +38,7 @@ namespace PantaRay {
             Color color = Color::White();
 
             if (texture != nullptr) {
-                color = texture->Sample(intersection.u, intersection.v);
+                color = texture->Sample(intersection);
             }
 
             for (auto& light : lights) {

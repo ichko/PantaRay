@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include "intersection.hpp"
 #include "color.hpp"
 
 namespace PantaRay {
@@ -9,7 +10,9 @@ namespace PantaRay {
 
         virtual void Set(unsigned x, unsigned y, Color color) {}
 
-        virtual Color Sample(float u, float v) const = 0;
+        virtual Color Sample(float u, float v) const { return Color(); };
+
+        virtual Color Sample(const Intersection& intersection) const { return Color(); };
 
         virtual ~ITexture() {}
 
@@ -54,9 +57,9 @@ namespace PantaRay {
             size(_size), first(_first), second(_second) {
         }
 
-        Color Sample(float u, float v) const {
-            int x = (int)floor(u / size);
-            int y = (int)floor(v / size);
+        Color Sample(const Intersection& intersection) const {
+            int x = (int)floor(intersection.u / size);
+            int y = (int)floor(intersection.v / size);
 
             return (x + y) % 2 == 0 ? first : second;
         }
@@ -69,8 +72,20 @@ namespace PantaRay {
 
         SolidColorTexture(Color _color) : color(_color) {}
 
-        Color Sample(float u, float v) const {
+        Color Sample(const Intersection& intersection) const {
             return color;
+        }
+
+    };
+
+    struct NormalTexture : ITexture {
+
+        Color Sample(const Intersection& intersection) const {
+            float r = float(fabs(intersection.normal.x));
+            float g = float(fabs(intersection.normal.y));
+            float b = float(fabs(intersection.normal.z));
+
+            return Color(r, g, b);
         }
 
     };

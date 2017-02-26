@@ -8,8 +8,8 @@ using namespace PantaRay;
 using namespace PantaRay::Constants;
 
 int main(int argc, char** argv) {
-    unsigned width = 500;
-    unsigned height = 500;
+    unsigned width = 400;
+    unsigned height = 400;
 
     auto renderer = Renderer(width, height, Color(0.01f, 0.01f, 0.01f));
     renderer.anti_aliasing = true;
@@ -21,6 +21,7 @@ int main(int argc, char** argv) {
     auto sphere_geometry = SphereGeometry(Vector(5, 20, 10), 6);
 
     auto checker_texture = CheckerTexture(Color(0.8f, 0.8f, 0.8f), Color(0.1f, 0.1f, 0.1f));
+    auto normal_texture = NormalTexture();
     auto lambert_shader = LambertShader();
 
     auto point_light_left = PointLight(Vector(-15, 20, 30), 550);
@@ -29,7 +30,7 @@ int main(int argc, char** argv) {
 
     auto scene = Scene()
         .Add(Mesh(plane_geometry, lambert_shader, checker_texture))
-        .Add(Mesh(sphere_geometry, lambert_shader))
+        .Add(Mesh(sphere_geometry, lambert_shader, normal_texture))
 
         .Add(point_light_front)
         .Add(point_light_right)
