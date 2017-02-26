@@ -73,8 +73,8 @@ namespace PantaRay {
 
                     auto normal_copy = intersection.normal.Copy();
 
-                    intersection.u = float((atan2(normal_copy.z, normal_copy.x) + Constants::pi) / (2 * Constants::pi));
-                    intersection.v = float((asin(normal_copy.y / radius) + Constants::pi / 2) / Constants::pi);
+                    intersection.u = float((atan2(normal_copy.y, normal_copy.x) + Constants::pi) / (2 * Constants::pi));
+                    intersection.v = float(asin(normal_copy.z / radius) * Constants::pi);
 
                     return true;
                 }

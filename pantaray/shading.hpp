@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "intersection.hpp"
+#include "texture.hpp"
 #include "light.hpp"
 #include "color.hpp"
 #include "utils.hpp"
@@ -12,35 +13,15 @@ namespace PantaRay {
 
     struct IShader {
 
-        virtual Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) = 0;
+        virtual Color Shade(Ray& ray, Intersection& intersection, ITexture* texture, std::vector<ILight*>& lights) = 0;
 
         virtual ~IShader() {}
 
     };
 
-    struct CheckerShader : public IShader {
-
-        float size;
-
-        Color first;
-        Color second;
-
-        CheckerShader(Color&& _first, Color&& _second, float _size = 5) :
-            size(_size), first(_first), second(_second) {
-        }
-
-        Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) {
-            int x = (int) floor(intersection.u / size);
-            int y = (int) floor(intersection.v / size);
-
-            return (x + y) % 2 == 0 ? first : second;
-        }
-
-    };
-
     struct NormalShader : public IShader {
 
-        Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) {
+        Color Shade(Ray& ray, Intersection& intersection, ITexture* texture, std::vector<ILight*>& lights) {
             auto r = float(intersection.normal.x);
             auto g = float(intersection.normal.y);
             auto b = float(intersection.normal.z);
@@ -52,12 +33,13 @@ namespace PantaRay {
 
     struct LambertShader : public IShader {
 
-        Color color;
-
-        LambertShader(Color&& _color) : color(_color) {}
-
-        Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) {
+        Color Shade(Ray& ray, Intersection& intersection, ITexture* texture, std::vector<ILight*>& lights) {
             Color color_sum;
+            Color color = Color::White();
+
+            if (texture != nullptr) {
+                color = texture->Sample(intersection.u, intersection.v);
+            }
 
             for (auto& light : lights) {
                 if (light->IsType(LightType::Point)) {
@@ -90,9 +72,9 @@ namespace PantaRay {
         CopositionShader(IShader& _first, IShader& _second, float _ratio = 0.5) :
             first(&_first), second(&_second), ratio(_ratio) {}
 
-        Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) {
-            auto first_color = first->Shade(ray, intersection, lights).Scale(ratio);
-            auto second_color = second->Shade(ray, intersection, lights).Scale(1 - ratio);
+        Color Shade(Ray& ray, Intersection& intersection, ITexture* texture, std::vector<ILight*>& lights) {
+            auto first_color = first->Shade(ray, intersection, texture, lights).Scale(ratio);
+            auto second_color = second->Shade(ray, intersection, texture, lights).Scale(1 - ratio);
 
             return first_color.Add(second_color);
         }

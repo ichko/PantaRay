@@ -45,7 +45,7 @@ namespace PantaRay {
 
             return *this;
         }
-
+        
         static Color White() {
             return Color(1, 1, 1);
         }

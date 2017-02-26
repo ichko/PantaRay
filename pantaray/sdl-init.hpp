@@ -13,7 +13,7 @@ int init(unsigned width, unsigned height, PantaRay::Image* buffer) {
 
     for (size_t y = 0; y < height; ++y) {
         for (size_t x = 0; x < width; ++x) {
-            auto c = buffer->Sample(x, y).Legalize().Scale(255);
+            auto c = buffer->Sample(float(x), float(y)).Legalize().Scale(255);
             SDL_SetRenderDrawColor(renderer, (Uint8)c.r, (Uint8)c.g, (Uint8)c.b, 255);
             SDL_RenderDrawPoint(renderer, x, y);
         }
