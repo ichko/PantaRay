@@ -4,9 +4,9 @@ namespace PantaRay {
 
     namespace Constants {
 
-        const auto eps = 1e-4;
-        const auto pi = 3.141592653589793238;
-        const auto inf = 1e99;
+        const float eps = 1e-4f;
+        const float pi = 3.141592653589793238f;
+        const float inf = 1e35f;
 
     }
 

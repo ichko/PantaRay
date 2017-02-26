@@ -40,19 +40,23 @@ namespace PantaRay {
 
             for (unsigned y = 0; y < height; ++y) {
                 for (unsigned x = 0; x < width; ++x) {
-                    double x_interpolate = double(x) / double(width);
-                    double y_interpolate = double(y) / double(height);
+                    float x_interpolate = float(x) / float(width);
+                    float y_interpolate = float(y) / float(height);
 
                     if (anti_aliasing) {
+                        float kernel_size = 2.0f;
                         Color color_sum = Color();
-                        for (double i = 0; i < 3; i++) {
-                            for (double j = 0; j < 3; j++) {
-                                Ray ray = camera.GetRay(x_interpolate + ((i / 3) / width), y_interpolate + ((j / 3) / height));
+                        for (float i = 0; i < kernel_size; ++i) {
+                            for (float j = 0; j < kernel_size; ++j) {
+                                Ray ray = camera
+                                    .GetRay(x_interpolate + ((i / kernel_size) / width),
+                                            y_interpolate + ((j / kernel_size) / height));
+
                                 color_sum.Add(Trace(ray, scene));
                             }
                         }
 
-                        screen_buffer[y][x] = color_sum.Scale(1.0 / 9.0);
+                        screen_buffer[y][x] = color_sum.Scale(1.0f / (kernel_size * kernel_size));
                     }
                     else {
                         Ray ray = camera.GetRay(x_interpolate, y_interpolate);

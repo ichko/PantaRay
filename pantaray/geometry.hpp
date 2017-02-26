@@ -26,10 +26,10 @@ namespace PantaRay {
         PlaneGeometry(const Vector& _position, const Vector& _normal) : position(_position), normal(_normal.Copy().Normalize()) {}
 
         bool Intersect(const Ray& ray, Intersection& intersection) {
-            double denom = normal.Dot(ray.direction);
+            float denom = normal.Dot(ray.direction);
 
             if (fabs(denom) > Constants::eps) {
-                double scalar = position.Copy().Subtract(ray.start).Dot(normal) / denom;
+                float scalar = position.Copy().Subtract(ray.start).Dot(normal) / denom;
                 if (scalar >= 0) {
                     intersection.distance = scalar;
                     intersection.normal = normal;
@@ -51,20 +51,20 @@ namespace PantaRay {
     struct SphereGeometry : public IGeometry {
 
         Vector position;
-        double radius;
+        float radius;
 
-        SphereGeometry(Vector&& _position, double&& _radius) : position(_position), radius(_radius) {}
+        SphereGeometry(Vector&& _position, float&& _radius) : position(_position), radius(_radius) {}
 
         bool Intersect(const Ray& ray, Intersection& intersection) {
-            double a = ray.direction.LengthSqr();
-            double b = ray.direction.Copy().Dot(ray.start.Copy().Subtract(position)) * 2;
-            double c = ray.start.Copy().Subtract(position).LengthSqr() - radius * radius;
-            double d = b * b - 4 * a * c;
+            float a = ray.direction.LengthSqr();
+            float b = ray.direction.Copy().Dot(ray.start.Copy().Subtract(position)) * 2;
+            float c = ray.start.Copy().Subtract(position).LengthSqr() - radius * radius;
+            float d = b * b - 4 * a * c;
 
             if (d > 0) {
-                double x1 = (-b + sqrt(d)) / (2 * a);
-                double x2 = (-b - sqrt(d)) / (2 * a);
-                double min_x = x1 > x2 ? x2 : x1;
+                float x1 = (-b + sqrt(d)) / (2 * a);
+                float x2 = (-b - sqrt(d)) / (2 * a);
+                float min_x = x1 > x2 ? x2 : x1;
 
                 if (min_x > 0) {
                     intersection.distance = min_x;
@@ -73,8 +73,8 @@ namespace PantaRay {
 
                     auto normal_copy = intersection.normal.Copy();
 
-                    intersection.u = (atan2(normal_copy.z, normal_copy.x) + Constants::pi) / (2 * Constants::pi);
-                    intersection.v = (asin(normal_copy.y / radius) + Constants::pi / 2) / Constants::pi;
+                    intersection.u = float((atan2(normal_copy.z, normal_copy.x) + Constants::pi) / (2 * Constants::pi));
+                    intersection.v = float((asin(normal_copy.y / radius) + Constants::pi / 2) / Constants::pi);
 
                     return true;
                 }

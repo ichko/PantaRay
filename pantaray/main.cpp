@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <time.h>
 
 #include "pantaray.hpp"
 #include "sdl-init.hpp"
@@ -8,13 +9,13 @@ using namespace PantaRay::Constants;
 
 int main(int argc, char** argv) {
 
-    auto width = 500;
-    auto height = 500;
+    unsigned width = 500;
+    unsigned height = 500;
 
-    auto renderer = Renderer(width, height, Color(0.01, 0.01, 0.01));
-    // renderer.anti_aliasing = true;
+    auto renderer = Renderer(width, height, Color(0.01f, 0.01f, 0.01f));
+    renderer.anti_aliasing = true;
 
-    auto camera = PinholeCamera(pi / 2.5, width / height)
+    auto camera = PinholeCamera(pi / 2.5f, float(width) / float(height))
         .Set(Vector(10, 0, 20), Vector(10, 1, 20), Vector(0, 0, 1));
 
     auto plane_geometry_top = PlaneGeometry(Vector(0, 0, 0), Vector(0, 0, 1));
@@ -28,7 +29,7 @@ int main(int argc, char** argv) {
     auto sphere_geometry_small = SphereGeometry(Vector(12, 75, 30), 12);
     auto sphere_geometry_big = SphereGeometry(Vector(-10, 75, 0), 25);
 
-    auto checker_shader = CheckerShader(Color(0.8, 0.8, 0.8), Color(0.1, 0.1, 0.1));
+    auto checker_shader = CheckerShader(Color(0.8f, 0.8f, 0.8f), Color(0.1f, 0.1f, 0.1f));
     auto sphere_checker_shader = CheckerShader(Color(1, 0, 0), Color(0, 0, 1), 0.01f);
     auto normal_shader = NormalShader();
 
@@ -42,7 +43,7 @@ int main(int argc, char** argv) {
     auto point_light_blue = PointLight(Vector(30, 40, 30), 500, Color(0, 0, 1));
     auto point_light_big = PointLight(Vector(30, 80, 55), 400, Color(1, 1, 1));
 
-    auto ambient_light = AmbientLight(Color(0.01, 0.01, 0.01));
+    auto ambient_light = AmbientLight(Color(0.01f, 0.01f, 0.01f));
 
     auto scene = Scene()
         .Add(Mesh(plane_geometry_top, composed_shader))
@@ -62,9 +63,12 @@ int main(int argc, char** argv) {
 
         .Add(ambient_light);
 
-    auto buffer = renderer.Render(camera, scene);
+    clock_t tStart = clock();
 
+    auto buffer = renderer.Render(camera, scene);
     init(width, height, buffer);
+
+    printf("Time taken: %.2fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
 
     return 0;
 

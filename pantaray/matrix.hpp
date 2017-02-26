@@ -6,7 +6,7 @@ namespace PantaRay {
 
     struct Matrix {
 
-        double data[3][3];
+        float data[3][3];
 
         Vector& Multiply(Vector& vector) {
             auto _x = vector.x * data[0][0] + vector.y * data[1][0] + vector.z * data[2][0];
@@ -20,9 +20,9 @@ namespace PantaRay {
             return vector;
         }
 
-        Matrix& Rotational(Vector& axis, double angle) {
-            double angle_sin = sin(angle);
-            double angle_cos = cos(angle);
+        Matrix& Rotational(Vector& axis, float angle) {
+            float angle_sin = sin(angle);
+            float angle_cos = cos(angle);
 
             data[0][0] = angle_cos + axis.x * axis.x * (1 - angle_cos);
             data[1][0] = axis.x * axis.y * (1 - angle_cos) - axis.z * angle_sin;

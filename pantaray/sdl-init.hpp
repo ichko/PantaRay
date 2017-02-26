@@ -1,6 +1,6 @@
 #pragma once
 
-int init(int width, int height, PantaRay::Color** buffer) {
+int init(unsigned width, unsigned height, PantaRay::Color** buffer) {
 
     SDL_Event event;
     SDL_Renderer *renderer;

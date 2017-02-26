@@ -9,8 +9,8 @@ namespace PantaRay {
 
         Vector position;
         Vector normal;
-        double distance;
-        double u, v;
+        float distance;
+        float u, v;
 
     };
 

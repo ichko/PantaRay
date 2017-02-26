@@ -4,3 +4,6 @@ Debug/
 *.db
 */docs/*
 sdl/
+x64/
+Release/
+*.user

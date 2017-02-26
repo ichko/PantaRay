@@ -8,27 +8,27 @@ namespace PantaRay {
 
     struct Vector {
 
-        double x, y, z;
+        float x, y, z;
 
-        Vector(double _x = 0, double _y = 0, double _z = 0) : x(_x), y(_y), z(_z) {}
+        Vector(float _x = 0, float _y = 0, float _z = 0) : x(_x), y(_y), z(_z) {}
 
         void MakeZero() {
             x = y = z = 0;
         }
 
-        bool IsZero(double eps = Constants::eps) {
+        bool IsZero(float eps = Constants::eps) {
             return Length() < eps;
         }
 
-        double LengthSqr() const {
+        float LengthSqr() const {
             return x * x + y * y + z * z;
         }
 
-        double Length() const {
-            return sqrt(LengthSqr());
+        float Length() const {
+            return sqrtf(LengthSqr());
         }
 
-        Vector& Scale(double factor) {
+        Vector& Scale(float factor) {
             x *= factor;
             y *= factor;
             z *= factor;
@@ -36,7 +36,7 @@ namespace PantaRay {
             return *this;
         }
 
-        Vector& ScaleTo(double factor) {
+        Vector& ScaleTo(float factor) {
             Normalize();
             return Scale(factor);
         }
@@ -82,12 +82,12 @@ namespace PantaRay {
             return *this;
         }
 
-        double Dot(const Vector& vector) const {
+        float Dot(const Vector& vector) const {
             return x * vector.x + y * vector.y + z * vector.z;
         }
 
         Vector& Normalize() {
-            double length = Length();
+            float length = Length();
             x /= length;
             y /= length;
             z /= length;

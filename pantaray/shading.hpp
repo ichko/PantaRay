@@ -85,9 +85,9 @@ namespace PantaRay {
 
         IShader* first;
         IShader* second;
-        double ratio;
+        float ratio;
 
-        CopositionShader(IShader& _first, IShader& _second, double _ratio = 0.5) :
+        CopositionShader(IShader& _first, IShader& _second, float _ratio = 0.5) :
             first(&_first), second(&_second), ratio(_ratio) {}
 
         Color Shade(Ray& ray, Intersection& intersection, std::vector<ILight*>& lights) {
