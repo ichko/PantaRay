@@ -159,26 +159,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cpp\camera.cpp" />
+    <ClCompile Include="cpp\geometry.cpp" />
+    <ClCompile Include="cpp\matrix.cpp" />
+    <ClCompile Include="cpp\renderer.cpp" />
+    <ClCompile Include="cpp\shading.cpp" />
+    <ClCompile Include="cpp\texture.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="camera.hpp" />
-    <ClInclude Include="color.hpp" />
-    <ClInclude Include="constants.hpp" />
-    <ClInclude Include="intersection.hpp" />
-    <ClInclude Include="light.hpp" />
-    <ClInclude Include="matrix.hpp" />
-    <ClInclude Include="mesh.hpp" />
-    <ClInclude Include="pantaray.hpp" />
-    <ClInclude Include="ray.hpp" />
-    <ClInclude Include="geometry.hpp" />
-    <ClInclude Include="renderer.hpp" />
-    <ClInclude Include="scene.hpp" />
-    <ClInclude Include="sdl-init.hpp" />
-    <ClInclude Include="shading.hpp" />
-    <ClInclude Include="texture.hpp" />
-    <ClInclude Include="utils.hpp" />
-    <ClInclude Include="vector.hpp" />
+    <ClInclude Include="hpp\camera.hpp" />
+    <ClInclude Include="hpp\color.hpp" />
+    <ClInclude Include="hpp\constants.hpp" />
+    <ClInclude Include="hpp\geometry.hpp" />
+    <ClInclude Include="hpp\intersection.hpp" />
+    <ClInclude Include="hpp\light.hpp" />
+    <ClInclude Include="hpp\matrix.hpp" />
+    <ClInclude Include="hpp\mesh.hpp" />
+    <ClInclude Include="hpp\pantaray.hpp" />
+    <ClInclude Include="hpp\ray.hpp" />
+    <ClInclude Include="hpp\renderer.hpp" />
+    <ClInclude Include="hpp\scene.hpp" />
+    <ClInclude Include="hpp\sdl-init.hpp" />
+    <ClInclude Include="hpp\shading-context.hpp" />
+    <ClInclude Include="hpp\shading.hpp" />
+    <ClInclude Include="hpp\texture.hpp" />
+    <ClInclude Include="hpp\utils.hpp" />
+    <ClInclude Include="hpp\vector.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -17,8 +17,6 @@ namespace PantaRay {
         Color color;
         LightType type;
 
-        virtual Vector VectorToLight(const Vector& intersection_position) = 0;
-
         virtual ~ILight() {}
 
         bool IsType(LightType _type) {
@@ -37,10 +35,6 @@ namespace PantaRay {
             type = LightType::Point;
         }
 
-        Vector VectorToLight(const Vector& intersection_position) {
-            return position.Copy().Subtract(intersection_position);
-        };
-
     };
 
     struct AmbientLight : public ILight {
@@ -51,10 +45,6 @@ namespace PantaRay {
             color = _color;
             type = LightType::Ambient;
         }
-
-        Vector VectorToLight(const Vector& intersection_position) {
-            return Vector();
-        };
 
     };
 

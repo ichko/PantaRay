@@ -1,8 +1,8 @@
 #include <SDL.h>
 #include <time.h>
 
-#include "pantaray.hpp"
-#include "sdl-init.hpp"
+#include "hpp/pantaray.hpp"
+#include "hpp/sdl-init.hpp"
 
 using namespace PantaRay;
 using namespace PantaRay::Constants;

@@ -57,12 +57,7 @@ namespace PantaRay {
             size(_size), first(_first), second(_second) {
         }
 
-        Color Sample(const Intersection& intersection) const {
-            int x = (int)floor(intersection.u / size);
-            int y = (int)floor(intersection.v / size);
-
-            return (x + y) % 2 == 0 ? first : second;
-        }
+        Color Sample(const Intersection& intersection) const;
 
     };
 
@@ -80,13 +75,7 @@ namespace PantaRay {
 
     struct NormalTexture : ITexture {
 
-        Color Sample(const Intersection& intersection) const {
-            float r = float(fabs(intersection.normal.x));
-            float g = float(fabs(intersection.normal.y));
-            float b = float(fabs(intersection.normal.z));
-
-            return Color(r, g, b);
-        }
+        Color Sample(const Intersection& intersection) const;
 
     };
 

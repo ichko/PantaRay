@@ -18,57 +18,78 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cpp\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\geometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\shading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="constants.hpp">
+    <ClInclude Include="hpp\camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vector.hpp">
+    <ClInclude Include="hpp\color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="color.hpp">
+    <ClInclude Include="hpp\constants.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pantaray.hpp">
+    <ClInclude Include="hpp\geometry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="camera.hpp">
+    <ClInclude Include="hpp\intersection.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ray.hpp">
+    <ClInclude Include="hpp\light.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="renderer.hpp">
+    <ClInclude Include="hpp\matrix.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene.hpp">
+    <ClInclude Include="hpp\mesh.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="matrix.hpp">
+    <ClInclude Include="hpp\pantaray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="shading.hpp">
+    <ClInclude Include="hpp\ray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="intersection.hpp">
+    <ClInclude Include="hpp\renderer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="geometry.hpp">
+    <ClInclude Include="hpp\scene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mesh.hpp">
+    <ClInclude Include="hpp\sdl-init.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdl-init.hpp">
+    <ClInclude Include="hpp\shading.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="light.hpp">
+    <ClInclude Include="hpp\shading-context.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils.hpp">
+    <ClInclude Include="hpp\texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="texture.hpp">
+    <ClInclude Include="hpp\utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hpp\vector.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
