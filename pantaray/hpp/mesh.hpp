@@ -1,11 +1,11 @@
 #pragma once
 
 #include "geometry.hpp"
-#include "shading.hpp"
-#include "texture.hpp"
 
 
 namespace PantaRay {
+
+    struct IShader;
 
     struct Mesh {
 

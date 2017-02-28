@@ -5,7 +5,6 @@
 #include "texture.hpp"
 #include "scene.hpp"
 
-
 namespace PantaRay {
 
     struct ShadingContext {

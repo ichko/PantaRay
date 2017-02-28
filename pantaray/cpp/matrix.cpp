@@ -16,8 +16,8 @@ namespace PantaRay {
     }
 
     Matrix& Matrix::Rotational(Vector& axis, float angle) {
-        float angle_sin = sin(angle);
-        float angle_cos = cos(angle);
+        float angle_sin = sinf(angle);
+        float angle_cos = cosf(angle);
 
         data[0][0] = angle_cos + axis.x * axis.x * (1 - angle_cos);
         data[1][0] = axis.x * axis.y * (1 - angle_cos) - axis.z * angle_sin;

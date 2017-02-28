@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "shading-context.hpp"
 #include "texture.hpp"
 #include "light.hpp"
 #include "utils.hpp"
@@ -12,7 +13,7 @@ namespace PantaRay {
 
     struct IShader {
 
-        virtual Color Shade(Ray& ray, Intersection& intersection, ITexture* texture, std::vector<ILight*>& lights) = 0;
+        virtual Color Shade(ShadingContext& context) = 0;
 
         virtual ~IShader() {}
 
@@ -20,13 +21,13 @@ namespace PantaRay {
 
     struct NormalShader : public IShader {
 
-        Color Shade(Ray& ray, Intersection& intersection, ITexture* texture, std::vector<ILight*>& lights);
+        Color Shade(ShadingContext& context);
 
     };
 
     struct LambertShader : public IShader {
 
-        Color Shade(Ray& ray, Intersection& intersection, ITexture* texture, std::vector<ILight*>& lights);
+        Color Shade(ShadingContext& context);
 
     };
 
@@ -39,7 +40,7 @@ namespace PantaRay {
         CopositionShader(IShader& _first, IShader& _second, float _ratio = 0.5) :
             first(&_first), second(&_second), ratio(_ratio) {}
 
-        Color Shade(Ray& ray, Intersection& intersection, ITexture* texture, std::vector<ILight*>& lights);
+        Color Shade(ShadingContext& context);
 
     };
 

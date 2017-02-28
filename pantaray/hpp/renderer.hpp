@@ -2,8 +2,12 @@
 
 #include "color.hpp"
 #include "camera.hpp"
-#include "scene.hpp"
 #include "texture.hpp"
+#include "scene.hpp"
+#include "shading-context.hpp"
+#include "mesh.hpp"
+#include "shading.hpp"
+
 
 namespace PantaRay {
 

@@ -51,7 +51,8 @@ namespace PantaRay {
         }
 
         if (closest_mesh != nullptr) {
-            return closest_mesh->shader->Shade(ray, closest_intersection, closest_mesh->texture, scene.GetLights());
+            ShadingContext context(ray, closest_intersection, closest_mesh->texture, scene);
+            return closest_mesh->shader->Shade(context);
         }
 
         return background;

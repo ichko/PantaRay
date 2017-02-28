@@ -5,6 +5,7 @@
 #include "mesh.hpp"
 #include "light.hpp"
 
+
 namespace PantaRay {
 
     class Scene {

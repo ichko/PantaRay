@@ -1,5 +1,6 @@
 #pragma once
 
+
 int init(unsigned width, unsigned height, PantaRay::Image* buffer) {
 
     SDL_Event event;

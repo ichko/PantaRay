@@ -6,3 +6,4 @@
 #include "renderer.hpp"
 #include "texture.hpp"
 #include "light.hpp"
+#include "shading.hpp"
