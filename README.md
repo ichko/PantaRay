@@ -54,14 +54,17 @@ return 0;
 
 # Screenshots
 
-### Reflection example
+### Reflection with texturing
+![reflection example](assets/example_anti_reflection_and_texturing.png)
+
+### Reflection
 ![reflection example](assets/sdl_example_reflection.png)
 
-### Anti aliasing example
+### Anti aliasing
 ![sdl example](assets/sdl_example_anti_aliasing.png)
 
-### Timing example
+### Timing
 ![sdl timing exmaple](assets/sdl_example_timing.png)
 
-### Console example
+### Console
 ![console example](assets/console_example.png)
