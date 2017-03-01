@@ -51,8 +51,10 @@ namespace PantaRay {
         Color result;
 
         if (context.ray->recursion_depth < 8) {
-            auto reflection_ray = Ray(context.intersection->position,
-                                      context.ray->direction.Copy().Reflect(context.intersection->normal).Normalize());
+            Ray reflection_ray(
+                context.intersection->position.Copy().Add(context.ray->direction.Copy().Scale(Constants::eps)),
+                context.ray->direction.Copy().Reflect(context.intersection->normal).Normalize()
+            );
             reflection_ray.recursion_depth = context.ray->recursion_depth + 1;
 
             Color reflected_ray_color = Renderer::Trace(reflection_ray, *context.scene);
