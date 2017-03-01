@@ -11,8 +11,8 @@ void first_test();
 void second_test();
 
 int main(int argc, char** argv) {
-    first_test();
-    // second_test();
+    // first_test();
+    second_test();
 
     return 0;
 }
@@ -33,6 +33,7 @@ void first_test() {
     auto checker_texture = CheckerTexture(Color(0.8f, 0.8f, 0.8f), Color(0.1f, 0.1f, 0.1f));
     auto normal_texture = NormalTexture();
     auto lambert_shader = LambertShader();
+    auto reflection_shader = ReflectionShader();
 
     auto point_light_left = PointLight(Vector(-15, 20, 30), 550);
     auto point_light_right = PointLight(Vector(15, 2, 2), 150);
@@ -40,7 +41,7 @@ void first_test() {
 
     auto scene = Scene()
         .Add(Mesh(plane_geometry, lambert_shader, checker_texture))
-        .Add(Mesh(sphere_geometry, lambert_shader, normal_texture))
+        .Add(Mesh(sphere_geometry, reflection_shader, normal_texture))
 
         .Add(point_light_front)
         .Add(point_light_right)
@@ -82,6 +83,7 @@ void second_test() {
 
     auto sphere_checker_shader = CheckerTexture(Color(1, 0, 0), Color(0, 0, 1), 0.01f);
     auto normal_shader = NormalShader();
+    auto reflection_shader = ReflectionShader(0.8);
 
     auto lambert_shader_red = LambertShader();
     auto lambert_shader = LambertShader();
@@ -95,14 +97,14 @@ void second_test() {
 
     auto scene = Scene()
         .Add(Mesh(plane_geometry_top, lambert_shader, checker_texture_big))
-        .Add(Mesh(plane_geometry_bottom, lambert_shader, checker_texture_big))
+        .Add(Mesh(plane_geometry_bottom, lambert_shader_red, checker_texture_big))
         .Add(Mesh(plane_geometry_left, lambert_shader_red, red_texture))
         .Add(Mesh(plane_geometry_back, lambert_shader_red, red_texture))
         .Add(Mesh(plane_geometry_right, lambert_shader_red, red_texture))
 
-        .Add(Mesh(sphere_geometry, lambert_shader))
+        .Add(Mesh(sphere_geometry, reflection_shader))
         .Add(Mesh(sphere_geometry_small, lambert_shader))
-        .Add(Mesh(sphere_geometry_big, normal_shader, checker_texture_small))
+        .Add(Mesh(sphere_geometry_big, reflection_shader, checker_texture_small))
 
         .Add(point_light_red)
         .Add(point_light_green)

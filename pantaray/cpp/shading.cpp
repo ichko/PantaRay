@@ -46,4 +46,20 @@ namespace PantaRay {
         return first_color.Add(second_color);
     }
 
+
+    Color ReflectionShader::Shade(ShadingContext& context) {
+        Color result;
+
+        if (context.ray->recursion_depth < 8) {
+            auto reflection_ray = Ray(context.intersection->position,
+                                      context.ray->direction.Copy().Reflect(context.intersection->normal).Normalize());
+            reflection_ray.recursion_depth = context.ray->recursion_depth + 1;
+
+            Color reflected_ray_color = Renderer::Trace(reflection_ray, *context.scene);
+            result = reflected_ray_color.Scale(reflection_damping);
+        }
+
+        return result;
+    }
+
 }

@@ -55,7 +55,7 @@ namespace PantaRay {
             return closest_mesh->shader->Shade(context);
         }
 
-        return background;
+        return Color();
     }
 
 }

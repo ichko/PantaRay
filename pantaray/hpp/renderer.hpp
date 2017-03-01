@@ -32,8 +32,7 @@ namespace PantaRay {
 
         Image* Render(ICamera& camera, Scene& scene);
 
-    private:
-        Color Trace(Ray& ray, Scene& scene);
+        static Color Trace(Ray& ray, Scene& scene);
 
     };
 
