@@ -11,8 +11,8 @@ void first_test();
 void second_test();
 
 int main(int argc, char** argv) {
-    // first_test();
-    second_test();
+    first_test();
+    // second_test();
 
     return 0;
 }
@@ -27,21 +27,36 @@ void first_test() {
     auto camera = PinholeCamera(pi / 2.5f, float(width) / float(height))
         .Set(Vector(0, 0, 10), Vector(0, 1, 10));
 
-    auto plane_geometry = PlaneGeometry(Vector(0, 0, 0), Vector(0, 0, 1));
-    auto sphere_geometry = SphereGeometry(Vector(5, 20, 10), 6);
+    auto plane_geometry_bottom = PlaneGeometry(Vector(0, 0, 0), Vector(0, 0, 1));
+    auto plane_geometry_top = PlaneGeometry(Vector(0, 0, 30), Vector(0, 0, -1));
+    auto plane_geometry_left = PlaneGeometry(Vector(-20, 0, 0), Vector(1, 0, 0));
+    auto plane_geometry_right = PlaneGeometry(Vector(20, 0, 0), Vector(-1, 0, 0));
 
-    auto checker_texture = CheckerTexture(Color(0.8f, 0.8f, 0.8f), Color(0.1f, 0.1f, 0.1f));
+    auto sphere_geometry = SphereGeometry(Vector(15, 25, 10), 6);
+    auto sphere_geometry_left = SphereGeometry(Vector(-5, 40, 0), 20);
+
+    auto solid_texture_red = SolidColorTexture(Color(0.9f, 0.1f, 0.2f));
+    auto solid_texture_blue = SolidColorTexture(Color(0.2f, 0.2f, 0.9f));
+    auto solid_texture_white = SolidColorTexture(Color(0.8f, 0.8f, 0.1f));
+    auto checker_texture = CheckerTexture(Color(0.1f, 0.1f, 0.1f), Color::White());
+    auto checker_texture_sphere = CheckerTexture(Color(0.9f, 0.1f, 0.1f), Color(0.1f, 0.1f, 0.9f), 0.01);
+
     auto normal_texture = NormalTexture();
     auto lambert_shader = LambertShader();
     auto reflection_shader = ReflectionShader();
 
-    auto point_light_left = PointLight(Vector(-15, 20, 30), 550);
+    auto point_light_left = PointLight(Vector(-15, 20, 20), 550);
     auto point_light_right = PointLight(Vector(15, 2, 2), 150);
-    auto point_light_front = PointLight(Vector(0, 2, 2), 150);
+    auto point_light_front = PointLight(Vector(0, 50, 2), 150);
 
     auto scene = Scene()
-        .Add(Mesh(plane_geometry, lambert_shader, checker_texture))
+        .Add(Mesh(plane_geometry_top, lambert_shader, solid_texture_white))
+        .Add(Mesh(plane_geometry_bottom, lambert_shader, checker_texture))
+        .Add(Mesh(plane_geometry_left, lambert_shader, solid_texture_red))
+        .Add(Mesh(plane_geometry_right, lambert_shader, solid_texture_blue))
+
         .Add(Mesh(sphere_geometry, reflection_shader, normal_texture))
+        .Add(Mesh(sphere_geometry_left, reflection_shader, checker_texture_sphere))
 
         .Add(point_light_front)
         .Add(point_light_right)

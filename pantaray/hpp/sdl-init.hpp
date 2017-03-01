@@ -18,9 +18,9 @@ int init(unsigned width, unsigned height, PantaRay::Image* buffer) {
             SDL_SetRenderDrawColor(renderer, (Uint8)c.r, (Uint8)c.g, (Uint8)c.b, 255);
             SDL_RenderDrawPoint(renderer, int(x), int(y));
         }
-
-        SDL_RenderPresent(renderer);
     }
+
+    SDL_RenderPresent(renderer);
 
     while (1) {
         if (SDL_PollEvent(&event) && event.type == SDL_QUIT)

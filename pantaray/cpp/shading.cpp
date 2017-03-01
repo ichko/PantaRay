@@ -49,6 +49,9 @@ namespace PantaRay {
 
     Color ReflectionShader::Shade(ShadingContext& context) {
         Color result;
+        if (context.texture != nullptr) {
+            result = context.texture->Sample(*context.intersection);
+        }
 
         if (context.ray->recursion_depth < 8) {
             Ray reflection_ray(
@@ -58,7 +61,7 @@ namespace PantaRay {
             reflection_ray.recursion_depth = context.ray->recursion_depth + 1;
 
             Color reflected_ray_color = Renderer::Trace(reflection_ray, *context.scene);
-            result = reflected_ray_color.Scale(reflection_damping);
+            result.Times(reflected_ray_color.Scale(reflection_damping));
         }
 
         return result;
