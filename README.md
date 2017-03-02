@@ -51,8 +51,15 @@ return 0;
 
 ```
 
+# Resources
+ - [Ray tracing course](http://raytracing-bg.net)
+ - [Mandelbulb](http://blog.hvidtfeldts.net)
+
 
 # Screenshots
+
+### Mandlbulb (ray marching with distance estimator)
+![sdl example](assets/example_ray_marching_mandelbulb.pngs)
 
 ### Reflection with texturing
 ![reflection example](assets/example_anti_reflection_and_texturing.png)
@@ -62,9 +69,6 @@ return 0;
 
 ### Anti aliasing
 ![sdl example](assets/sdl_example_anti_aliasing.png)
-
-### Timing
-![sdl timing exmaple](assets/sdl_example_timing.png)
 
 ### Console
 ![console example](assets/console_example.png)
