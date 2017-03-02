@@ -52,4 +52,21 @@ namespace PantaRay {
         return false;
     }
 
+    bool DistanceEstimatorGeometry::Intersect(const Ray& ray, Intersection& intersection) {
+        float total_distance = 0.0f;
+        unsigned steps;
+
+        for (steps = 0; steps < max_iterations; steps++) {
+            auto marching_ray = ray.Copy().Translate(total_distance);
+            float distance = distance_extimator(marching_ray.start);
+            total_distance += distance;
+            if (distance < epsilon_break) break;
+        }
+
+        intersection.distance = float(steps) / float(max_iterations);
+        intersection.normal = total_distance;
+
+        return true;
+    }
+
 }

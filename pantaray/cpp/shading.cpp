@@ -1,3 +1,4 @@
+#include <math.h>
 #include "../hpp/shading.hpp"
 
 
@@ -9,6 +10,11 @@ namespace PantaRay {
         auto b = float(context.intersection->normal.z);
 
         return Color(fabs(r), fabs(g), fabs(b));
+    }
+
+    Color DistanceShader::Shade(ShadingContext& context) {
+        auto color = context.intersection->distance;
+        return Color(color, color, color);
     }
 
     Color LambertShader::Shade(ShadingContext& context) {

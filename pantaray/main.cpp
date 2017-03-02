@@ -10,7 +10,7 @@ using namespace PantaRay::Constants;
 void first_test();
 void second_test();
 
-int main(int argc, char** argv) {
+int sdl_main() {
     first_test();
     // second_test();
 

@@ -32,6 +32,12 @@ namespace PantaRay {
 
     };
 
+    struct DistanceShader : public IShader {
+
+        Color Shade(ShadingContext& context);
+
+    };
+
     struct CopositionShader : public IShader {
 
         IShader* first;

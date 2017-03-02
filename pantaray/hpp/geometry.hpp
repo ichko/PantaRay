@@ -42,4 +42,18 @@ namespace PantaRay {
 
     };
 
+    struct DistanceEstimatorGeometry : public IGeometry {
+
+        float(*distance_extimator)(Vector);
+        unsigned max_iterations;
+        float epsilon_break;
+
+        DistanceEstimatorGeometry(float(*_distance_extimator)(Vector), unsigned _max_iterations = 32, float _epsilon_break = 5e-4) :
+            distance_extimator(_distance_extimator), max_iterations(_max_iterations), epsilon_break(_epsilon_break) {
+        }
+
+        bool Intersect(const Ray& ray, Intersection& intersection);
+
+    };
+
 }

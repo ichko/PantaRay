@@ -165,7 +165,7 @@
     <ClCompile Include="cpp\renderer.cpp" />
     <ClCompile Include="cpp\shading.cpp" />
     <ClCompile Include="cpp\texture.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mandelbulb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hpp\camera.hpp" />
