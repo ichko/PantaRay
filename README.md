@@ -61,7 +61,7 @@ return 0;
 ### Mandlbulb (ray marching with distance estimator)
 ![sdl example](assets/example_ray_marching_mandelbulb.png)
 
-### Mandlbulb 17th power (ray marching with distance estimator)
+### Mandlbulb 17th power
 ![sdl example](assets/example_ray_marching_mandelbulb_17th_power.png)
 
 ### Reflection with texturing

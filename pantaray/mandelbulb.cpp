@@ -9,8 +9,8 @@ using namespace PantaRay;
 using namespace PantaRay::Constants;
 
 int main(int argc, char** argv) {
-    unsigned width = 450;
-    unsigned height = 450;
+    unsigned width = 400;
+    unsigned height = 400;
 
     auto renderer = Renderer(width, height, Color(0.01f, 0.01f, 0.01f));
     renderer.anti_aliasing = true;
@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 
     auto mandelbulb_geometry = DistanceEstimatorGeometry([](Vector p) -> float {
         Vector z = p;
-        float power = 17.0f;
+        float power = 8.0f;
         float dr = 1.0f;
         float r = 0.0f;
 
@@ -46,12 +46,8 @@ int main(int argc, char** argv) {
 
     auto distance_shader = DistanceShader();
 
-
-    auto point_light_left = PointLight(Vector(-15, 20, 20), 550);
-
     auto scene = Scene()
-        .Add(Mesh(mandelbulb_geometry, distance_shader))
-        .Add(point_light_left);
+        .Add(Mesh(mandelbulb_geometry, distance_shader));
 
     clock_t tStart = clock();
 
