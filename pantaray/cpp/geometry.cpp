@@ -63,7 +63,7 @@ namespace PantaRay {
             if (distance < epsilon_break) break;
         }
 
-        intersection.distance = float(steps) / float(max_iterations);
+        intersection.distance = 1 - float(steps) / float(max_iterations);
         intersection.normal = total_distance;
 
         return true;
