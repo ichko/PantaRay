@@ -8,7 +8,7 @@
 using namespace PantaRay;
 using namespace PantaRay::Constants;
 
-int main(int argc, char** argv) {
+int main_mandelbulb(int argc, char** argv) {
     unsigned width = 400;
     unsigned height = 400;
 

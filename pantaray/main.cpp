@@ -10,7 +10,7 @@ using namespace PantaRay::Constants;
 void first_test();
 void second_test();
 
-int sdl_main() {
+int main(int argc, char** argv) {
     first_test();
     // second_test();
 
@@ -39,7 +39,7 @@ void first_test() {
     auto solid_texture_blue = SolidColorTexture(Color(0.2f, 0.2f, 0.9f));
     auto solid_texture_white = SolidColorTexture(Color(0.8f, 0.8f, 0.1f));
     auto checker_texture = CheckerTexture(Color(0.1f, 0.1f, 0.1f), Color::White());
-    auto checker_texture_sphere = CheckerTexture(Color(0.9f, 0.1f, 0.1f), Color(0.1f, 0.1f, 0.9f), 0.01);
+    auto checker_texture_sphere = CheckerTexture(Color(0.9f, 0.1f, 0.1f), Color(0.1f, 0.1f, 0.9f), 0.01f);
 
     auto normal_texture = NormalTexture();
     auto lambert_shader = LambertShader();
@@ -93,12 +93,12 @@ void second_test() {
     auto sphere_geometry_big = SphereGeometry(Vector(-10, 75, 0), 25);
 
     auto checker_texture_big = CheckerTexture(Color(0.8f, 0.8f, 0.8f), Color(0.1f, 0.1f, 0.1f));
-    auto checker_texture_small = CheckerTexture(Color(0.8f, 0.8f, 0.8f), Color(0.1f, 0.1f, 0.1f), 1.0f / 15);
+    auto checker_texture_small = CheckerTexture(Color(0.8f, 0.8f, 0.8f), Color(0.3f, 0.3f, 0.3f), 1.0f / 15);
     auto red_texture = SolidColorTexture(Color(1.0f, 0.0f, 0.0f));
 
     auto sphere_checker_shader = CheckerTexture(Color(1, 0, 0), Color(0, 0, 1), 0.01f);
     auto normal_shader = NormalShader();
-    auto reflection_shader = ReflectionShader(0.8);
+    auto reflection_shader = ReflectionShader(0.8f);
 
     auto lambert_shader_red = LambertShader();
     auto lambert_shader = LambertShader();

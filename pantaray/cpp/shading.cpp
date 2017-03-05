@@ -54,7 +54,7 @@ namespace PantaRay {
 
 
     Color ReflectionShader::Shade(ShadingContext& context) {
-        Color result;
+        Color result = Color::White();
         if (context.texture != nullptr) {
             result = context.texture->Sample(*context.intersection);
         }
