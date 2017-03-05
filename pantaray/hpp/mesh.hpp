@@ -6,6 +6,7 @@
 namespace PantaRay {
 
     struct IShader;
+    struct ITexture;
 
     struct Mesh {
 

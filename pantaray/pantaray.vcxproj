@@ -164,6 +164,7 @@
     <ClCompile Include="cpp\light.cpp" />
     <ClCompile Include="cpp\matrix.cpp" />
     <ClCompile Include="cpp\renderer.cpp" />
+    <ClCompile Include="cpp\scene.cpp" />
     <ClCompile Include="cpp\shading.cpp" />
     <ClCompile Include="cpp\texture.cpp" />
     <ClCompile Include="main.cpp" />

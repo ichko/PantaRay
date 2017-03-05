@@ -8,7 +8,7 @@
 
 namespace PantaRay {
 
-    class Scene {
+    class Scene : IGeometry {
 
         std::vector<Mesh> objects;
         std::vector<ILight*> lights;
@@ -23,6 +23,8 @@ namespace PantaRay {
             lights.push_back(&light);
             return *this;
         }
+
+        bool Intersect(const Ray& ray, Intersection& intersection);
 
         std::vector<Mesh>& GetObjects() {
             return objects;

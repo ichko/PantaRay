@@ -37,22 +37,12 @@ namespace PantaRay {
     }
 
     Color Renderer::Trace(Ray& ray, Scene& scene) {
-        auto closest_intersection = Intersection();
-        closest_intersection.distance = Constants::inf;
-        Mesh* closest_mesh = nullptr;
+        Intersection intersection;
+        scene.Intersect(ray, intersection);
 
-        for (auto& object : scene.GetObjects()) {
-            auto intersection = Intersection();
-            if (object.geometry->Intersect(ray, intersection) &&
-                intersection.distance < closest_intersection.distance) {
-                closest_intersection = intersection;
-                closest_mesh = &object;
-            }
-        }
-
-        if (closest_mesh != nullptr) {
-            ShadingContext context(ray, closest_intersection, closest_mesh->texture, scene);
-            return closest_mesh->shader->Shade(context);
+        if (intersection.mesh != nullptr) {
+            ShadingContext context(ray, intersection, intersection.mesh->texture, scene);
+            return intersection.mesh->shader->Shade(context);
         }
 
         return Color();
