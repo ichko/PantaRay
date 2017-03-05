@@ -11,8 +11,8 @@ void first_test();
 void second_test();
 
 int main(int argc, char** argv) {
-    first_test();
-    // second_test();
+    // first_test();
+    second_test();
 
     return 0;
 }
