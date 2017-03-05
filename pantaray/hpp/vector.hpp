@@ -57,7 +57,7 @@ namespace PantaRay {
             return *this;
         }
 
-        Vector& Reflect() {
+        Vector& Invert() {
             x = -x;
             y = -y;
             z = -z;

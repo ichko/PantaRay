@@ -6,6 +6,8 @@
 
 namespace PantaRay {
 
+    struct ShadingContext;
+
     enum LightType {
         Point,
         Ambient
@@ -18,6 +20,8 @@ namespace PantaRay {
         LightType type;
 
         virtual ~ILight() {}
+
+        virtual float GetLightContribution(ShadingContext& context);
 
         bool IsType(LightType _type) {
             return type == _type;
@@ -35,6 +39,8 @@ namespace PantaRay {
             type = LightType::Point;
         }
 
+        float GetLightContribution(ShadingContext& context);
+
     };
 
     struct AmbientLight : public ILight {
@@ -45,6 +51,10 @@ namespace PantaRay {
             color = _color;
             type = LightType::Ambient;
         }
+
+        float GetLightContribution(ShadingContext& context) {
+            return 1.0f;
+        };
 
     };
 

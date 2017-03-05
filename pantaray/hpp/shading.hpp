@@ -26,9 +26,16 @@ namespace PantaRay {
 
     };
 
-    struct LambertShader : public IShader {
+    struct PhongShader : public IShader {
 
-        Color Shade(ShadingContext& context);
+        float specular_multiplier;
+        float specular_exponent;
+
+        PhongShader(const float&& _specular_multiplier = 0.0f, const float&& _specular_exponent = 8.0f) :
+            specular_multiplier(_specular_multiplier), specular_exponent(_specular_exponent) {
+        }
+
+        virtual Color Shade(ShadingContext& context);
 
     };
 

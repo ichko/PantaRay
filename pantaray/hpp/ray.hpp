@@ -28,6 +28,11 @@ namespace PantaRay {
             return *this;
         }
 
+        Ray& MoveForward(float& length) {
+            start.Add(direction.Copy().Scale(length));
+            return *this;
+        }
+
     };
 
 }

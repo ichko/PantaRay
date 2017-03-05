@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="cpp\camera.cpp" />
     <ClCompile Include="cpp\geometry.cpp" />
+    <ClCompile Include="cpp\light.cpp" />
     <ClCompile Include="cpp\matrix.cpp" />
     <ClCompile Include="cpp\renderer.cpp" />
     <ClCompile Include="cpp\shading.cpp" />

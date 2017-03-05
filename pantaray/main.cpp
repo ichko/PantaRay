@@ -32,22 +32,18 @@ void first_test() {
     auto plane_geometry_left = PlaneGeometry(Vector(-20, 0, 0), Vector(1, 0, 0));
     auto plane_geometry_right = PlaneGeometry(Vector(20, 0, 0), Vector(-1, 0, 0));
 
-    auto sphere_geometry = SphereGeometry(Vector(15, 25, 10), 6);
-    auto sphere_geometry_left = SphereGeometry(Vector(-5, 40, 0), 20);
+    auto sphere_geometry = SphereGeometry(Vector(5, 30, 10), 6);
 
     auto solid_texture_red = SolidColorTexture(Color(0.9f, 0.1f, 0.2f));
     auto solid_texture_blue = SolidColorTexture(Color(0.2f, 0.2f, 0.9f));
     auto solid_texture_white = SolidColorTexture(Color(0.8f, 0.8f, 0.1f));
     auto checker_texture = CheckerTexture(Color(0.1f, 0.1f, 0.1f), Color::White());
-    auto checker_texture_sphere = CheckerTexture(Color(0.9f, 0.1f, 0.1f), Color(0.1f, 0.1f, 0.9f), 0.01f);
+    auto checker_texture_sphere = CheckerTexture(Color(0.9f, 0.1f, 0.1f), Color(0.1f, 0.1f, 0.9f), 0.1f);
 
-    auto normal_texture = NormalTexture();
-    auto lambert_shader = LambertShader();
-    auto reflection_shader = ReflectionShader();
+    auto phong_shader = PhongShader(6, 10);
+    auto lambert_shader = PhongShader();
 
     auto point_light_left = PointLight(Vector(-15, 20, 20), 550);
-    auto point_light_right = PointLight(Vector(15, 2, 2), 150);
-    auto point_light_front = PointLight(Vector(0, 50, 2), 150);
 
     auto scene = Scene()
         .Add(Mesh(plane_geometry_top, lambert_shader, solid_texture_white))
@@ -55,11 +51,8 @@ void first_test() {
         .Add(Mesh(plane_geometry_left, lambert_shader, solid_texture_red))
         .Add(Mesh(plane_geometry_right, lambert_shader, solid_texture_blue))
 
-        .Add(Mesh(sphere_geometry, reflection_shader, normal_texture))
-        .Add(Mesh(sphere_geometry_left, reflection_shader, checker_texture_sphere))
+        .Add(Mesh(sphere_geometry, phong_shader, checker_texture_sphere))
 
-        .Add(point_light_front)
-        .Add(point_light_right)
         .Add(point_light_left);
 
     clock_t tStart = clock();
@@ -100,8 +93,8 @@ void second_test() {
     auto normal_shader = NormalShader();
     auto reflection_shader = ReflectionShader(0.8f);
 
-    auto lambert_shader_red = LambertShader();
-    auto lambert_shader = LambertShader();
+    auto lambert_shader_red = PhongShader();
+    auto lambert_shader = PhongShader();
 
     auto point_light_red = PointLight(Vector(10, 40, 25), 550, Color(1, 0, 0));
     auto point_light_green = PointLight(Vector(15, 40, 40), 500, Color(0, 1, 0));
