@@ -65,10 +65,10 @@ return 0;
 ![sdl example](assets/example_ray_marching_mandelbulb_17th_power.png)
 
 ### Reflection with texturing and shadows
-![reflection example](assets/example_shadows_and_reflection.png)
+![reflection example](assets/example_anti_reflection_and_texturing.png)
 
-### Reflection
-![reflection example](assets/sdl_example_reflection.png)
+### Reflection and shadow
+![reflection example](assets/example_shadows_and_reflection.png)
 
 ### Anti aliasing
 ![sdl example](assets/sdl_example_anti_aliasing.png)
