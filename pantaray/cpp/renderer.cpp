@@ -16,10 +16,8 @@ namespace PantaRay {
                     Color color_sum = Color();
                     for (float i = 0; i < kernel_size; ++i) {
                         for (float j = 0; j < kernel_size; ++j) {
-                            Ray ray = camera
-                                .GetRay(x_interpolate + ((i / kernel_size) / width),
-                                        y_interpolate + ((j / kernel_size) / height));
-
+                            Ray ray = camera.GetRay(x_interpolate + ((i / kernel_size) / width),
+                                y_interpolate + ((j / kernel_size) / height));
                             color_sum.Add(Trace(ray, scene));
                         }
                     }

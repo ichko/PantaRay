@@ -28,11 +28,11 @@ void first_test() {
         .Set(Vector(0, 0, 10), Vector(0, 1, 10));
 
     auto plane_geometry_bottom = PlaneGeometry(Vector(0, 0, 0), Vector(0, 0, 1));
-    auto plane_geometry_top = PlaneGeometry(Vector(0, 0, 30), Vector(0, 0, -1));
+    auto plane_geometry_top = PlaneGeometry(Vector(0, 0, 45), Vector(0, 0, -1));
     auto plane_geometry_left = PlaneGeometry(Vector(-20, 0, 0), Vector(1, 0, 0));
     auto plane_geometry_right = PlaneGeometry(Vector(20, 0, 0), Vector(-1, 0, 0));
 
-    auto sphere_geometry = SphereGeometry(Vector(5, 30, 10), 6);
+    auto sphere_geometry = SphereGeometry(Vector(5, 30, 6), 6);
 
     auto solid_texture_red = SolidColorTexture(Color(0.9f, 0.1f, 0.2f));
     auto solid_texture_blue = SolidColorTexture(Color(0.2f, 0.2f, 0.9f));
@@ -43,7 +43,7 @@ void first_test() {
     auto phong_shader = PhongShader(6, 10);
     auto lambert_shader = PhongShader();
 
-    auto point_light_left = PointLight(Vector(-15, 20, 20), 550);
+    auto point_light_left = PointLight(Vector(10, 20, 30), 650);
 
     auto scene = Scene()
         .Add(Mesh(plane_geometry_top, lambert_shader, solid_texture_white))

@@ -76,8 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Iliya\me\pantaray\pantaray\sdl\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Iliya\me\pantaray\pantaray\sdl\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\i4ko9\ssd\c++\pantaray\pantaray\sdl\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\i4ko9\ssd\c++\pantaray\pantaray\sdl\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

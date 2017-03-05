@@ -62,9 +62,11 @@ namespace PantaRay {
     struct ReflectionShader : public IShader {
 
         float reflection_damping;
+        unsigned max_recursion_depth;
 
         ReflectionShader(float _reflection_damping = 1) :
             reflection_damping(_reflection_damping) {
+            max_recursion_depth = 8;
         }
 
         Color Shade(ShadingContext& context);

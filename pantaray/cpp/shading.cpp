@@ -4,6 +4,25 @@
 
 namespace PantaRay {
 
+    float ShadowCoefficient(ShadingContext& context, PointLight* light, float in_shadow_coefficient = 0.1) {
+        auto start_position = context.intersection->position.Copy()
+            .Add(context.intersection->normal.Copy().Scale(Constants::eps));
+        auto target_dist = start_position.Copy().Subtract(light->position).Length();
+        auto shado_coefficient = 1.0f;
+        Intersection intersection;
+
+        context.scene->Intersect(Ray(
+            start_position,
+            light->position.Copy().Subtract(context.intersection->position).Normalize()
+        ), intersection);
+
+        if (intersection.mesh != nullptr && intersection.distance < target_dist) {
+            shado_coefficient = in_shadow_coefficient;
+        }
+
+        return shado_coefficient;
+    }
+
     Color NormalShader::Shade(ShadingContext& context) {
         auto r = float(context.intersection->normal.x);
         auto g = float(context.intersection->normal.y);
@@ -37,10 +56,12 @@ namespace PantaRay {
                 auto phong_coefficient = float(fmax(0.0f, context.ray->direction.Copy().Invert().Dot(reflected_vector)));
                 phong_coefficient = float(pow(phong_coefficient, specular_exponent));
 
+                auto shadow_coefficient = ShadowCoefficient(context, point_light);
+
                 color_sum
                     .Legalize()
-                    .Add(point_light->color.Copy().Scale(lambert_coefficient * light_factor))
-                    .Add(Color::White().Scale(phong_coefficient * specular_multiplier * light_factor))
+                    .Add(point_light->color.Copy().Scale(lambert_coefficient * light_factor * shadow_coefficient))
+                    .Add(Color::White().Scale(phong_coefficient * specular_multiplier * light_factor * shadow_coefficient))
                     .Times(color);
             }
             else if (light->IsType(LightType::Ambient)) {
@@ -66,7 +87,7 @@ namespace PantaRay {
             result = context.texture->Sample(*context.intersection);
         }
 
-        if (context.ray->recursion_depth < 8) {
+        if (context.ray->recursion_depth < max_recursion_depth) {
             Ray reflection_ray(
                 context.intersection->position.Copy().Add(context.ray->direction.Copy().Scale(Constants::eps)),
                 context.ray->direction.Copy().Reflect(context.intersection->normal).Normalize()
