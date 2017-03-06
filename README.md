@@ -64,7 +64,7 @@ return 0;
 ### Mandlbulb 17th power
 ![sdl example](assets/example_ray_marching_mandelbulb_17th_power.png)
 
-### Reflection with texturing and shadows
+### Reflection with texturing
 ![reflection example](assets/example_anti_reflection_and_texturing.png)
 
 ### Reflection and shadow
